@@ -1,0 +1,89 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+:root {
+  --background: #f8f9fa;
+  --foreground: #101418;
+  --card: #ffffff;
+  --border: #e4e7eb;
+  --input: #d8dde2;
+  --muted-foreground: #626b75;
+  --primary: #0d7d72;
+  --primary-foreground: #ffffff;
+  --secondary: #eef1f4;
+  --secondary-foreground: #2c343c;
+  --accent: #eef1f4;
+  --ring: #0d7d72;
+  --gradient-from: #0d7d72;
+  --gradient-to: #17a2a8;
+}
+.dark {
+  --background: #0b0f12;
+  --foreground: #eef1f4;
+  --card: #12181c;
+  --border: #232c33;
+  --input: #2b353d;
+  --muted-foreground: #93a0aa;
+  --primary: #2fd4bd;
+  --primary-foreground: #06231f;
+  --secondary: #1a2228;
+  --secondary-foreground: #d3dce2;
+  --accent: #1a2228;
+  --ring: #2fd4bd;
+  --gradient-from: #2fd4bd;
+  --gradient-to: #6fe3c6;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+.text-gradient {
+  background-image: linear-gradient(90deg, var(--gradient-from), var(--gradient-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@keyframes skill-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.skill-track {
+  animation: skill-scroll 32s linear infinite;
+}
+.card-hover {
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 12px 30px -18px rgba(16, 20, 24, 0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .skill-track {
+    animation: none;
+  }
+  .card-hover:hover {
+    transform: none;
+  }
+}
