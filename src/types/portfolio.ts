@@ -4,6 +4,7 @@ export interface Skill {
   name: string;
   icon: IconType;
   category: "Frontend" | "Backend" | "Tools" | "Software" | "Database";
+  color: string;
 }
 
 export interface Project {

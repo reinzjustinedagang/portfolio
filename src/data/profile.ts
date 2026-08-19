@@ -1,8 +1,8 @@
 export const profile = {
   name: "Reinz Justine Dagang",
-  handle: "reinzj.dev",
+  handle: "reinz.dev",
   firstName: "Reinz",
-  role: "IT Professional & Programmer",
+  role: "Full-Stack Developer",
   location: "Malawaan, Rizal, Occidental Mindoro, Philippines",
   email: "reinzjustinedagang@gmail.com",
   availability: "Available for freelance & full-time roles",

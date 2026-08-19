@@ -2,10 +2,11 @@ import { Project } from "../types/portfolio";
 
 export const projects: Project[] = [
   {
-    title: "Senior Citizen Information Management System",
+    title:
+      "Office for Senior Citizens Affairs Information Management System with SMS Notification",
     description:
       "A web-based information management system designed for the Office for Senior Citizens Affairs (OSCA) to manage senior citizen records, benefits, pensions, events, and notifications.",
-    image: "/67cf8c91-f29d-4eeb-831f-78d9a1fec9b0.jpg",
+    image: "/OSCA_mockup.png",
     tags: ["React", "Node.js", "Express", "MySQL", "Tailwind CSS"],
     liveUrl: "#",
     repoUrl: "#",
@@ -26,12 +27,52 @@ export const projects: Project[] = [
     outcome:
       "Provided OSCA with a centralized platform for managing senior citizen information and administrative processes more efficiently.",
   },
+  {
+    title: "OJT Portfolio Website",
+    description:
+      "A responsive digital OJT portfolio built with React.js to organize and present my complete internship documentation, work experiences, company information, assessments, and supporting documents.",
 
+    image: "/ojt-portfolio.svg",
+
+    tags: ["React.js", "JavaScipt", "Tailwind CSS", "Vercel"],
+
+    liveUrl: "https://reinzjustinedagang-ojt-portfolio.vercel.app",
+    repoUrl: "https://github.com/reinzjustinedagang/reinz-ojt-portfolio",
+
+    problem:
+      "Traditional OJT portfolios are often presented as printed documents, making them difficult to navigate, access, and present digitally. My internship documentation contained multiple chapters, reports, forms, certificates, and supporting documents that needed to be organized in a clear and accessible way.",
+
+    solution:
+      "Developed a responsive React.js web application that transforms my complete OJT portfolio into an organized digital experience. The website uses structured navigation and dedicated sections for each part of the internship documentation, making the portfolio easier to browse and present.",
+
+    role: "Frontend developer — designed and developed the website structure, user interface, navigation, responsive layouts, document presentation, and interactive components using React.js and Tailwind CSS.",
+
+    features: [
+      "Digital OJT portfolio presentation",
+      "Interactive table of contents",
+      "Title page and personal information",
+      "Personal philosophy and career plan",
+      "Internship introduction and objectives",
+      "Company profile and organizational structure",
+      "Weekly accomplishment reports",
+      "Daily time records",
+      "Internship progress and analysis reports",
+      "Student internship evaluation",
+      "Supporting documents and appendices",
+      "Certificate and internship documentation",
+      "Internship photos and office work documentation",
+      "Curriculum Vitae",
+      "Responsive design for desktop and mobile",
+    ],
+
+    outcome:
+      "Created a centralized digital version of my OJT portfolio that makes my internship experience, accomplishments, documentation, and supporting materials easier to navigate, present, and access.",
+  },
   {
     title: "BasaTayo",
     description:
       "A Filipino educational mobile application designed to help children practice Tagalog reading and writing through interactive lessons and tracing activities.",
-    image: "/2dc42428-ad73-45f7-9ad4-abd88da09b94.jpg",
+    image: "/BasaTayo_mockup.png",
     tags: ["React Native", "Expo", "JavaScript", "NativeWind"],
     liveUrl: "#",
     repoUrl: "#",

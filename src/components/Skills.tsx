@@ -7,7 +7,10 @@ function SkillItem({ skill }: { skill: Skill }) {
 
   return (
     <div className="flex shrink-0 items-center gap-3 px-6">
-      <div className="text-primary transition-transform duration-300 group-hover/item:scale-110">
+      <div
+        className="transition-transform duration-300 group-hover/item:scale-110"
+        style={{ color: skill.color }}
+      >
         <Icon size={24} aria-hidden="true" />
       </div>
 
