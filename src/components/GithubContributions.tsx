@@ -16,7 +16,7 @@ type GitHubResponse = {
 
 const GITHUB_USERNAME = "reinzjustinedagang";
 
-const CONTRIBUTION_COLOR = "#2BC0AC";
+const CONTRIBUTION_COLOR = "var(--github-contribution)";
 
 function getContributionOpacity(level: number) {
   const opacity = [0.08, 0.25, 0.45, 0.7, 1];
