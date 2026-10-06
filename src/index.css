@@ -94,3 +94,64 @@ body {
     transform: none;
   }
 }
+/* Circular light/dark mode transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+@keyframes name-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes role-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-name-marquee {
+  animation: name-marquee 25s linear infinite;
+}
+
+.animate-role-marquee {
+  animation: role-marquee 50s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-name-marquee {
+    animation-play-state: paused;
+  }
+
+  .animate-role-marquee {
+    animation-play-state: paused;
+  }
+}
+
+/* Matrix grid background */
+.matrix-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.25;
+}

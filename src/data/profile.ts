@@ -10,8 +10,8 @@ export const profile = {
   intro:
     "I design and build clean, modern digital experiences. From web applications to backend systems, I turn complex problems into elegant, user-friendly solutions.",
   about: [
-    "I'm a freelance full-stack developer who enjoys the whole path of a feature — sketching the flow, designing the schema, building the interface, and shipping it.",
-    "Most of my work sits between product and infrastructure: React and JavaScript on the front, Node, Python and SQL behind it. I care about code that the next person can read and extend.",
+    "I'm a developer who enjoys turning ideas into real, useful applications. I like being involved in the whole process — understanding the problem, planning the solution, designing the experience, writing the code, and seeing everything come together as a finished product.",
+    "I work mainly with React, JavaScript, Node.js, Python, SQL, and C#. I'm naturally curious and enjoy learning through building, whether I'm creating a web application, improving a system, or figuring out a better way to solve a problem. For me, good development is about more than making something work — it's about making it clear, reliable, and easy to build on.",
   ],
 
   socials: {

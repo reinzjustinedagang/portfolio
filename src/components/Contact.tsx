@@ -116,6 +116,7 @@ export function Contact() {
                   value={form.name}
                   onChange={update("name")}
                   placeholder="Your name"
+                  maxLength={50}
                   className={fieldClass}
                 />
               </div>
@@ -133,23 +134,32 @@ export function Contact() {
                   value={form.email}
                   onChange={update("email")}
                   placeholder="you@example.com"
+                  maxLength={100}
                   className={fieldClass}
                 />
               </div>
 
               <div className="grid gap-2">
-                <label
-                  htmlFor="message"
-                  className="font-display text-sm font-medium text-foreground"
-                >
-                  Message
-                </label>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="message"
+                    className="font-display text-sm font-medium text-foreground"
+                  >
+                    Message
+                  </label>
+
+                  <span className="text-xs text-muted-foreground">
+                    {form.message.length}/500
+                  </span>
+                </div>
+
                 <textarea
                   id="message"
                   rows={4}
                   value={form.message}
                   onChange={update("message")}
                   placeholder="Tell me about your project..."
+                  maxLength={500}
                   className={fieldClass}
                 />
               </div>

@@ -3,7 +3,13 @@ import { IconType } from "react-icons";
 export interface Skill {
   name: string;
   icon: IconType;
-  category: "Frontend" | "Backend" | "Tools" | "Software" | "Database";
+  category:
+    | "Frontend"
+    | "Backend"
+    | "Tools"
+    | "Software"
+    | "Hardware"
+    | "Database";
   color: string;
 }
 

@@ -9,6 +9,7 @@ import {
   SiGit,
   SiPostman,
   SiDotnet,
+  SiArduino,
 } from "react-icons/si";
 
 import { DiJava } from "react-icons/di";
@@ -81,5 +82,11 @@ export const skills: Skill[] = [
     icon: DiJava,
     category: "Software",
     color: "#ED8B00",
+  },
+  {
+    name: "Arduino",
+    icon: SiArduino,
+    category: "Hardware",
+    color: "#009297",
   },
 ];
