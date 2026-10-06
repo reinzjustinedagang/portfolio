@@ -16,8 +16,13 @@ export function Hero() {
     >
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
         {/* Name */}
-        <h1 className="font-display text-5xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
-          Reinz Justine <span className="text-gradient">Dagang</span>
+        <h1 className="font-display text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+          <span
+            className="glitch text-foreground"
+            data-text="Reinz Justine Dagang"
+          >
+            Reinz Justine Dagang
+          </span>
         </h1>
 
         {/* Roles */}

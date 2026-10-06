@@ -155,3 +155,138 @@ body {
   background-size: 40px 40px;
   opacity: 0.25;
 }
+
+/* Strong glitch effect */
+.glitch {
+  position: relative;
+  display: inline-block;
+  color: var(--foreground);
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Cyan layer */
+.glitch::before {
+  color: #00e5ff;
+  clip-path: polygon(0 10%, 100% 10%, 100% 35%, 0 35%);
+  animation: glitch-cyan 2s infinite steps(1, end);
+}
+
+/* Pink layer */
+.glitch::after {
+  color: #ff2d75;
+  clip-path: polygon(0 60%, 100% 60%, 100% 90%, 0 90%);
+  animation: glitch-pink 2s infinite steps(1, end);
+}
+
+@keyframes glitch-cyan {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    transform: translate(0);
+  }
+
+  83% {
+    opacity: 1;
+    transform: translate(-6px, -2px);
+  }
+
+  84% {
+    opacity: 1;
+    transform: translate(7px, 2px);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translate(-4px, 1px);
+  }
+
+  86% {
+    opacity: 1;
+    transform: translate(5px, -1px);
+  }
+
+  87% {
+    opacity: 0;
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-pink {
+  0%,
+  84%,
+  100% {
+    opacity: 0;
+    transform: translate(0);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translate(6px, 2px);
+  }
+
+  86% {
+    opacity: 1;
+    transform: translate(-7px, -2px);
+  }
+
+  87% {
+    opacity: 1;
+    transform: translate(4px, 1px);
+  }
+
+  88% {
+    opacity: 1;
+    transform: translate(-5px, -1px);
+  }
+
+  89% {
+    opacity: 0;
+    transform: translate(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before,
+  .glitch::after {
+    animation: none;
+  }
+}
+
+/* Typing effect */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 6px;
+  vertical-align: -0.1em;
+  background-color: var(--primary);
+  animation: typing-cursor 0.8s steps(1) infinite;
+}
+
+@keyframes typing-cursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-cursor {
+    animation: none;
+    opacity: 1;
+  }
+}

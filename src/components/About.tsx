@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { profile } from "../data/profile";
 
 // Put your cut-out photos in /public/images
@@ -6,13 +6,56 @@ const MAIN_PHOTO = "/images/main.png";
 const SMALL_PHOTOS = ["/images/small-2.png", "/images/small-1.png"];
 
 export function About() {
+  const [typedName, setTypedName] = useState("");
+
+  useEffect(() => {
+    const name = profile.name;
+
+    let index = 0;
+    let deleting = false;
+    let pause = 0;
+
+    const timer = setInterval(() => {
+      // Pause after typing the full name
+      if (!deleting && index === name.length) {
+        pause++;
+
+        if (pause < 12) return;
+
+        pause = 0;
+        deleting = true;
+        return;
+      }
+
+      // Pause after deleting the full name
+      if (deleting && index === 0) {
+        pause++;
+
+        if (pause < 5) return;
+
+        pause = 0;
+        deleting = false;
+        return;
+      }
+
+      if (!deleting) {
+        index++;
+        setTypedName(name.slice(0, index));
+      } else {
+        index--;
+        setTypedName(name.slice(0, index));
+      }
+    }, 100);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       id="about"
       className="relative flex min-h-screen items-center overflow-hidden px-6 py-20 md:py-28"
     >
       <style>{`
-        /* Cut-out outline + shadow, themed for light and dark */
         .about-photo {
           --outline: #ffffff;
           --drop: rgba(0, 0, 0, 0.14);
@@ -55,7 +98,10 @@ export function About() {
 
           <h2 className="mt-2 font-display text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
             Hi, I'm
-            <span className="mt-1 block text-primary">{profile.name}</span>
+            <span className="mt-1 block min-h-[1.2em] text-primary">
+              {typedName}
+              <span className="typing-cursor" aria-hidden="true" />
+            </span>
           </h2>
 
           <div className="mt-6 space-y-4">
