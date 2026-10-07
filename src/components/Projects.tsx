@@ -11,7 +11,7 @@ export function Projects() {
   const startX = useRef<number | null>(null);
   const moved = useRef(false);
 
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   const total = projects.length;
@@ -21,9 +21,9 @@ export function Projects() {
    * Trigger section animation when it enters the viewport.
    */
   useEffect(() => {
-    const section = sectionRef.current;
+    const content = contentRef.current;
 
-    if (!section) return;
+    if (!content) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -33,12 +33,12 @@ export function Projects() {
         }
       },
       {
-        threshold: 0.15,
+        threshold: 0.25,
         rootMargin: "0px 0px -10% 0px",
       },
     );
 
-    observer.observe(section);
+    observer.observe(content);
 
     return () => observer.disconnect();
   }, []);
@@ -120,7 +120,6 @@ export function Projects() {
 
   return (
     <section
-      ref={sectionRef}
       id="projects"
       className={`projects-section px-6 py-20 md:py-28 ${
         isVisible ? "projects-visible" : ""
@@ -231,6 +230,7 @@ export function Projects() {
 
         {/* Side by side */}
         <div
+          ref={contentRef}
           className="grid items-center gap-12 md:grid-cols-2 md:gap-16"
           onKeyDown={(e) => {
             if (e.key === "ArrowRight") go(1);

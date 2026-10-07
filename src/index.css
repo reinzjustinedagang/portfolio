@@ -309,3 +309,62 @@ body {
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.12));
   filter: blur(20px);
 }
+
+/* Skills */
+
+.skill-word {
+  animation: skillFloat 5s ease-in-out infinite;
+  text-shadow: 0 0 20px color-mix(in srgb, currentColor 15%, transparent);
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease,
+    text-shadow 300ms ease;
+}
+
+.skill-word:hover {
+  transform: scale(1.12);
+  text-shadow:
+    0 0 12px color-mix(in srgb, currentColor 45%, transparent),
+    0 0 30px color-mix(in srgb, currentColor 20%, transparent);
+}
+
+@keyframes skillFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Give different skills slightly different animation timing */
+
+.skill-word:nth-child(2n) {
+  animation-delay: -1.2s;
+}
+
+.skill-word:nth-child(3n) {
+  animation-delay: -2.4s;
+}
+
+.skill-word:nth-child(4n) {
+  animation-delay: -3.1s;
+}
+
+@media (max-width: 768px) {
+  .skill-word {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-word {
+    animation: none;
+  }
+
+  * {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 
-const names = Array.from({ length: 8 }, (_, index) => (
+const names = Array.from({ length: 15 }, (_, index) => (
   <React.Fragment key={index}>
     <span className="whitespace-nowrap font-display text-sm font-bold tracking-tight text-foreground md:text-sm">
       Hire me
