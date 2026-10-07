@@ -55,6 +55,8 @@ export function About() {
       id="about"
       className="relative flex min-h-screen items-center overflow-hidden px-6 py-20 md:py-28"
     >
+      {/* Theme-aware plain background */}
+      <div aria-hidden="true" className="about-background" />
       <style>{`
         .about-photo {
           --outline: #ffffff;

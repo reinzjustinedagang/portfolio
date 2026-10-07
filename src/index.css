@@ -23,7 +23,7 @@
   --ring: #0d7d72;
   --gradient-from: #0d7d72;
   --gradient-to: #17a2a8;
-  --github-contribution: #216e39;
+  --github-contribution: #0d9f8f;
 }
 .dark {
   --background: #0b0f12;
@@ -289,4 +289,23 @@ body {
     animation: none;
     opacity: 1;
   }
+}
+
+.about-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: var(--background);
+}
+
+.about-background::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.12));
+  filter: blur(20px);
 }

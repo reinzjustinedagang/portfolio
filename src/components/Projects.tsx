@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { projects } from "../data/projects";
 import { Project } from "../types/portfolio";
@@ -7,11 +7,41 @@ import { ProjectModal } from "./ProjectModal";
 export function Projects() {
   const [modalProject, setModalProject] = useState<Project | null>(null);
   const [index, setIndex] = useState(0);
+
   const startX = useRef<number | null>(null);
   const moved = useRef(false);
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
   const total = projects.length;
   const current = projects[index];
+
+  /*
+   * Trigger section animation when it enters the viewport.
+   */
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   const go = (dir: 1 | -1) => {
     setIndex((i) => Math.min(Math.max(i + dir, 0), total - 1));
@@ -19,7 +49,6 @@ export function Projects() {
 
   const cardStyle = (offset: number): React.CSSProperties => {
     if (offset < 0) {
-      // already swiped away
       return {
         transform: "translateX(-120%) rotate(-10deg)",
         opacity: 0,
@@ -27,6 +56,7 @@ export function Projects() {
         pointerEvents: "none",
       };
     }
+
     if (offset === 0) {
       return {
         transform: "translate(0,0) rotate(0deg) scale(1)",
@@ -34,6 +64,7 @@ export function Projects() {
         zIndex: 30,
       };
     }
+
     if (offset === 1) {
       return {
         transform: "translate(0,14px) rotate(2deg) scale(0.96)",
@@ -42,6 +73,7 @@ export function Projects() {
         pointerEvents: "none",
       };
     }
+
     if (offset === 2) {
       return {
         transform: "translate(0,28px) rotate(-2deg) scale(0.92)",
@@ -50,6 +82,7 @@ export function Projects() {
         pointerEvents: "none",
       };
     }
+
     return {
       transform: "translate(0,28px) rotate(-2deg) scale(0.9)",
       opacity: 0,
@@ -65,7 +98,9 @@ export function Projects() {
 
   const onPointerUp = (e: React.PointerEvent) => {
     if (startX.current === null) return;
+
     const dx = e.clientX - startX.current;
+
     startX.current = null;
 
     if (Math.abs(dx) > 50) {
@@ -79,17 +114,102 @@ export function Projects() {
       moved.current = false;
       return;
     }
+
     setModalProject(current);
   };
 
   return (
-    <section id="projects" className="px-6 py-20 md:py-28">
+    <section
+      ref={sectionRef}
+      id="projects"
+      className={`projects-section px-6 py-20 md:py-28 ${
+        isVisible ? "projects-visible" : ""
+      }`}
+    >
       <style>{`
-        @keyframes project-text-in {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
+        /*
+        * --------------------------------
+        * PROJECT CARD + DESCRIPTION
+        * --------------------------------
+        */
+
+        .projects-stack,
+        .projects-content {
+          opacity: 0;
+          will-change: transform, opacity;
         }
-        .project-text-in { animation: project-text-in 0.45s ease-out both; }
+
+        .projects-stack {
+          transform: translateX(-100px);
+          transition:
+            transform 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 1.1s ease-out;
+        }
+
+        .projects-content {
+          transform: translateX(100px);
+          transition:
+            transform 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 1.1s ease-out;
+          transition-delay: 0.2s;
+        }
+
+        /*
+        * --------------------------------
+        * VISIBLE STATE
+        * --------------------------------
+        */
+
+        .projects-section.projects-visible .projects-stack {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .projects-section.projects-visible .projects-content {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        /*
+        * --------------------------------
+        * PROJECT TEXT CHANGE
+        * --------------------------------
+        */
+
+        @keyframes project-text-in {
+          from {
+            opacity: 0;
+            transform: translateY(12px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .project-text-in {
+          animation: project-text-in 0.55s ease-out both;
+        }
+
+        /*
+        * --------------------------------
+        * REDUCED MOTION
+        * --------------------------------
+        */
+
+        @media (prefers-reduced-motion: reduce) {
+          .projects-stack,
+          .projects-content {
+            opacity: 1;
+            transform: none;
+            transition: none;
+          }
+
+          .project-text-in {
+            animation: none;
+          }
+        }
       `}</style>
 
       <div className="mx-auto max-w-6xl">
@@ -109,7 +229,7 @@ export function Projects() {
           </p>
         </div>
 
-        {/* Side by side: stack (left) + description (right) */}
+        {/* Side by side */}
         <div
           className="grid items-center gap-12 md:grid-cols-2 md:gap-16"
           onKeyDown={(e) => {
@@ -119,7 +239,7 @@ export function Projects() {
         >
           {/* Card stack */}
           <div
-            className="relative mb-10 w-full touch-pan-y select-none md:mb-8"
+            className="projects-stack relative mb-10 w-full touch-pan-y select-none md:mb-8"
             style={{ aspectRatio: "16 / 10" }}
             onPointerDown={onPointerDown}
             onPointerUp={onPointerUp}
@@ -168,7 +288,7 @@ export function Projects() {
           </div>
 
           {/* Description + navigation */}
-          <div className="flex flex-col">
+          <div className="projects-content flex flex-col">
             <div key={index} className="project-text-in" aria-live="polite">
               <p className="font-display text-sm font-medium text-muted-foreground">
                 {String(index + 1).padStart(2, "0")} /{" "}
@@ -206,7 +326,7 @@ export function Projects() {
             </div>
 
             {/* Arrows + dots */}
-            <div className="mt-10 flex items-center gap-4">
+            <div className="projects-navigation mt-10 flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => go(-1)}

@@ -31,8 +31,8 @@ export function App() {
             <Hero />
             <NameMarquee />
             <About />
-            <Experience />
             <RoleMarquee />
+            <Experience />
             <Skills />
             <Projects />
             <GithubContributions />

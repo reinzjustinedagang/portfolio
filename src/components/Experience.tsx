@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { roles } from "../data/experience";
 
 export function Experience() {
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  useEffect(() => {
+    const items = itemRefs.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("experience-visible");
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
+
+    items.forEach((item) => {
+      if (item) observer.observe(item);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="experience" className="px-6 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
@@ -22,7 +48,7 @@ export function Experience() {
 
         {/* Zig-zag timeline */}
         <ol className="relative">
-          {/* center line (left edge on mobile) */}
+          {/* Center line */}
           <span
             aria-hidden="true"
             className="absolute bottom-0 left-[7px] top-0 w-px bg-border md:left-1/2 md:-translate-x-1/2"
@@ -34,9 +60,14 @@ export function Experience() {
             return (
               <li
                 key={role.company}
-                className="relative grid pb-16 last:pb-0 md:grid-cols-2 md:gap-0"
+                ref={(el) => {
+                  itemRefs.current[i] = el;
+                }}
+                className={`experience-item relative grid pb-16 last:pb-0 md:grid-cols-2 md:gap-0 ${
+                  isLeft ? "experience-left" : "experience-right"
+                }`}
               >
-                {/* dot on the line */}
+                {/* Dot on the line */}
                 <span
                   aria-hidden="true"
                   className="absolute left-0 top-2 size-4 rounded-full border-4 border-background bg-primary ring-1 ring-primary/40 md:left-1/2 md:-translate-x-1/2"
@@ -49,35 +80,39 @@ export function Experience() {
                       : "pl-10 md:col-start-2 md:pl-14"
                   }
                 >
-                  {/* period */}
+                  {/* Period */}
                   <p className="font-display text-sm font-semibold text-primary">
                     {role.period}
                   </p>
 
-                  {/* title + company */}
+                  {/* Title + company */}
                   <h3 className="mt-2 font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
                     {role.title}
                   </h3>
+
                   <p className="mt-1 font-display text-base font-medium text-muted-foreground">
                     {role.company}
                   </p>
 
-                  {/* scope */}
+                  {/* Scope */}
                   <p className="mt-4 text-base leading-relaxed text-muted-foreground">
                     {role.scope}
                   </p>
 
-                  {/* highlights */}
+                  {/* Highlights */}
                   <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground md:text-base">
                     {role.highlights.map((highlight) => (
                       <li
                         key={highlight}
-                        className={`flex gap-3 ${isLeft ? "md:flex-row-reverse" : ""}`}
+                        className={`flex gap-3 ${
+                          isLeft ? "md:flex-row-reverse" : ""
+                        }`}
                       >
                         <span
                           className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary"
                           aria-hidden="true"
                         />
+
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -88,6 +123,59 @@ export function Experience() {
           })}
         </ol>
       </div>
+
+      {/* Animation styles */}
+      <style>{`
+        .experience-item {
+          opacity: 0;
+          will-change: transform, opacity;
+          transition:
+            transform 1.6s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 1.1s ease-out;
+        }
+
+        /* Start positions */
+        .experience-left {
+          transform: translateX(-100px);
+        }
+
+        .experience-right {
+          transform: translateX(100px);
+        }
+
+        /* Final position */
+        .experience-item.experience-visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        /* Slightly slower on larger screens */
+        @media (min-width: 768px) {
+          .experience-item {
+            transition:
+              transform 1.9s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 1.3s ease-out;
+          }
+
+          .experience-left {
+            transform: translateX(-140px);
+          }
+
+          .experience-right {
+            transform: translateX(140px);
+          }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+          .experience-item,
+          .experience-item.experience-visible {
+            opacity: 1;
+            transform: none;
+            transition: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }
