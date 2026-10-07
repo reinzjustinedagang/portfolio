@@ -5,7 +5,7 @@ export const profile = {
   role: "Freelance Full-Stack Developer",
   experience: "2",
   location: "Malawaan, Rizal, Occidental Mindoro, Philippines",
-  email: "reinzjustinedagang@gmail.com",
+  email: "reinzjustinedagang.work@gmail.com",
   availability: "Available for freelance & full-time roles",
   intro:
     "I design and build clean, modern digital experiences. From web applications to backend systems, I turn complex problems into elegant, user-friendly solutions.",
@@ -16,6 +16,7 @@ export const profile = {
 
   socials: {
     github: "https://github.com/reinzjustinedagang",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/reinz-justine-dagang-2a3680407/",
+    facebook: "https://www.facebook.com/reinz.justine.dagang/",
   },
 };

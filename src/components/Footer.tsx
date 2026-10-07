@@ -1,6 +1,7 @@
 import React from "react";
 import { GithubIcon, LinkedinIcon, MailIcon } from "lucide-react";
 import { profile } from "../data/profile";
+import { FaFacebook, FaFacebookF } from "react-icons/fa";
 
 export function Footer() {
   return (
@@ -38,15 +39,17 @@ export function Footer() {
               <LinkedinIcon size={20} aria-hidden="true" />
             </a>
           </li>
-          {/* <li>
+          <li>
             <a
-              href={`mailto:${profile.email}`}
+              href={profile.socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex text-muted-foreground transition-colors duration-150 ease-smooth hover:text-foreground"
-              aria-label="Email">
-              
-              <MailIcon size={20} aria-hidden="true" />
+              aria-label="Facebook"
+            >
+              <FaFacebookF size={20} aria-hidden="true" />
             </a>
-          </li> */}
+          </li>
         </ul>
 
         <p className="text-xs text-muted-foreground">
